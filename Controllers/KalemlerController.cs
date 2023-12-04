@@ -80,7 +80,7 @@ namespace BilancoApp.Controllers
             return NoContent();
         }
 
-        // POST: api/Kalemler
+        // POST: Kalemler
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Kalemler>> PostKalemler(Kalemler kalemler)
@@ -95,7 +95,7 @@ namespace BilancoApp.Controllers
             return CreatedAtAction("GetKalemler", new { id = kalemler.Id }, kalemler);
         }
 
-        // DELETE: api/Kalemler/5
+        // DELETE: Kalemler/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteKalemler(int id)
         {
