@@ -28,7 +28,22 @@ namespace BilancoApp.Controllers
           {
               return NotFound();
           }
-            return await _context.Kalemler.ToListAsync();
+            
+
+            var kalemler = await _context.Kalemler
+                .Select(kalem => new
+                {
+                    kalem.Id,
+                    kalem.Name,
+                    kalem.Description,
+                    Type = kalem.Type == 0 ? "Gider" :
+                           kalem.Type == 1 ? "Gelir" :
+                           kalem.Type.ToString(),
+                    Tarih = kalem.Tarih.ToString("dd.MM.yyyy")
+                }).ToListAsync();
+
+            return Ok(kalemler);
+
         }
 
         // GET: Kalemler/5
