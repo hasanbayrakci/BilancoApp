@@ -39,6 +39,10 @@ namespace BilancoApp.Controllers
                     Type = kalem.Type == 0 ? "Gider" :
                            kalem.Type == 1 ? "Gelir" :
                            kalem.Type.ToString(),
+                    GiderType = kalem.GiderType == 0 ? "Fatura" :
+                           kalem.GiderType == 1 ? "Kredi Kartı" :
+                           kalem.GiderType == 2 ? "Diğer" :
+                           kalem.GiderType.ToString(),
                     Tarih = kalem.Tarih.ToString("dd.MM.yyyy")
                 }).ToListAsync();
 
@@ -69,10 +73,7 @@ namespace BilancoApp.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutKalemler(int id, Kalemler kalemler)
         {
-            if (id != kalemler.Id)
-            {
-                return BadRequest();
-            }
+            kalemler.Id = id;
 
             _context.Entry(kalemler).State = EntityState.Modified;
 
