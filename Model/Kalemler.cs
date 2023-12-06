@@ -13,6 +13,8 @@ namespace BilancoApp.Model
         public string? Description { get; set; }
         [Required]
         public int Type { get; set; } //0:Gider, 1:Gelir
+        [Required]
+        public int GiderType { get; set; } //0:Fatura, 1:Kredi Kartı, 2:Diğer
         public DateTime Tarih {  get; set; } = DateTime.Now;
     }
 }
