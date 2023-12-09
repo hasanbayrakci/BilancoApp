@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using BilancoApp.Model;
 
 namespace BilancoApp.Model
 {
@@ -11,6 +10,7 @@ namespace BilancoApp.Model
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<BilancoApp.Model.Kalemler> Kalemler { get; set; } = default!;
+        public DbSet<GelirGider> GelirGider { get; set; } = default!;
 
     }
 }
