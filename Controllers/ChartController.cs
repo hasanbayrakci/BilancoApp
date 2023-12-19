@@ -18,15 +18,16 @@ namespace BilancoApp.Controllers
             _context = context;
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<GelirGider>>> GetChart(int id)
+        [HttpGet("{id}/{year}")]
+        public async Task<ActionResult<IEnumerable<GelirGider>>> GetChart(int id, int year)
         {
             var Kalem = await _context.Kalemler.FindAsync(id);
 
             var gelirGider = await _context.GelirGider
-                            .Where(e => e.KalemlerId == id)
-                            .OrderBy(e => e.Tarih)
-                            .Select(e => e.Tutar)
+                            .Where(e => e.KalemlerId == id && e.IslemTarihi.Year == year)
+                            .OrderBy(e => e.IslemTarihi)
+                            .GroupBy(e => e.IslemTarihi.Month)
+                            .Select(g =>  g.Sum(e => e.Tutar))
                             .ToListAsync();
 
             if (gelirGider == null || gelirGider.Count == 0)
@@ -37,7 +38,7 @@ namespace BilancoApp.Controllers
             var data = gelirGider.ToArray();
 
             var seriesData = new List<object>();
-            seriesData.Add(new { label = Kalem.Name, data = data });
+            seriesData.Add(new { label = Kalem.Name, data = data, toplamData = data.Sum().ToString("#,##.##") });
 
             return Ok(seriesData);
         }
