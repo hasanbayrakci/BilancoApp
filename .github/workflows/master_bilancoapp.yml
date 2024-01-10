@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'bilancoapp'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BA5D9D717FA34A06B240A7D7D257273D }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9863367741B044E68F1AB352B5CCDC7B }}
           package: .
