@@ -27,7 +27,7 @@ namespace BilancoApp.Controllers
                             .Where(e => e.KalemlerId == id && e.IslemTarihi.Year == year)
                             .OrderBy(e => e.IslemTarihi)
                             .GroupBy(e => e.IslemTarihi.Month)
-                            .Select(g =>  g.Sum(e => e.Tutar))
+                            .Select(g => g.Sum(e => (double)e.Tutar))
                             .ToListAsync();
 
             if (gelirGider == null || gelirGider.Count == 0)
